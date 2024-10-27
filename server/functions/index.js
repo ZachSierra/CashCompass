@@ -22,6 +22,8 @@ const functions = require("firebase-functions");
 // ------------ FUNCTION IMPORTS ------------
 const plaidGenerateLinkTokenEntry = require("./plaidGenerateLinkToken/entry");
 const firestoreInsertUser = require("./firestoreInsertUser/entry");
+const plaidPublicTokenExchangeEntry = require("./plaidPublicTokenExchange/entry");
 // ------------ FUNCTION EXPORTS ------------
 exports.pGLTE = functions.https.onRequest(plaidGenerateLinkTokenEntry.enter);
 exports.fIUE = functions.auth.user().onCreate(firestoreInsertUser.enter);
+exports.pPTEE = functions.https.onRequest(plaidPublicTokenExchangeEntry.enter);
