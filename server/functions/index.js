@@ -17,3 +17,11 @@ const logger = require("firebase-functions/logger");
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+const functions = require("firebase-functions");
+
+// ------------ FUNCTION IMPORTS ------------
+const plaidGenerateLinkTokenEntry = require("./plaidGenerateLinkToken/entry");
+const firestoreInsertUser = require("./firestoreInsertUser/entry");
+// ------------ FUNCTION EXPORTS ------------
+exports.pGLTE = functions.https.onRequest(plaidGenerateLinkTokenEntry.enter);
+exports.fIUE = functions.auth.user().onCreate(firestoreInsertUser.enter);
