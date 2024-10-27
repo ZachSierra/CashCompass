@@ -23,7 +23,13 @@ const functions = require("firebase-functions");
 const plaidGenerateLinkTokenEntry = require("./plaidGenerateLinkToken/entry");
 const firestoreInsertUser = require("./firestoreInsertUser/entry");
 const plaidPublicTokenExchangeEntry = require("./plaidPublicTokenExchange/entry");
+const firestoreInsertTransactionEntry = require("./firestoreInsertTransaction/entry");
+const firestoreInsertBudgetEntry = require("./firestoreInsertBudget/entry");
+const firestoreInsertAccountEntry = require("./firestoreInsertAccount/entry");
 // ------------ FUNCTION EXPORTS ------------
 exports.pGLTE = functions.https.onRequest(plaidGenerateLinkTokenEntry.enter);
 exports.fIUE = functions.auth.user().onCreate(firestoreInsertUser.enter);
 exports.pPTEE = functions.https.onRequest(plaidPublicTokenExchangeEntry.enter);
+exports.fITE = functions.https.onRequest(firestoreInsertTransactionEntry.enter);
+exports.fIBE = functions.https.onRequest(firestoreInsertBudgetEntry.enter);
+exports.fIAE = functions.https.onRequest(firestoreInsertAccountEntry.enter);

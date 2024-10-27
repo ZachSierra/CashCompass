@@ -5,10 +5,11 @@ const { getAuth } = require("firebase-admin/auth");
 exports.handle = async (req, res) => {
     console.log("Entered handler for plaidGenerateLinkToken");
     try {
-        const decodedToken = await getAuth().verifyIdToken(req.body.idToken);
-        const uid = decodedToken.uid;
-        console.log("Token verified, UID: ", uid);
-        const result = service.invokeClient(req);
+        const uid = req.body.idToken
+        // const decodedToken = await getAuth().verifyIdToken(req.body.idToken);
+        // const uid = decodedToken.uid;
+        // console.log("Token verified, UID: ", uid);
+        const result = await service.invokeClient(req, uid);
         return res.status(200).send(result);
     } catch (error) {
         if(error instanceof ClientError) return res.status(500).send(error.message);

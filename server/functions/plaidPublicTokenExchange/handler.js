@@ -8,7 +8,7 @@ exports.handle = async (req, res) => {
         const decodedToken = await getAuth().verifyIdToken(req.body.idToken);
         const uid = decodedToken.uid;
         console.log("Token verified, UID: ", uid);
-        const result = service.invokeClient(req);
+        const result = await service.invokeClient(req);
         return res.status(200).send(result);
     } catch (error) {
         if(error instanceof ClientError) return res.status(500).send(error.message);

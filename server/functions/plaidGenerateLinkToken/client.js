@@ -1,20 +1,20 @@
 const axios = require('axios');
-require('dotenv').config();
+require('dotenv').config({ path: '../../.env' });
 const { ClientError } = require("./errors");
 
-exports.plaidGenerateLinkToken = async (req) => {
+exports.plaidGenerateLinkToken = async (req, uid) => {
     console.log("Entered client for plaidGenerateLinkToken");
-    const PLAID_CLIENT_ID = process.env.PLAID_CLIENT_ID;
-    const PLAID_SECRET = process.env.PLAID_SECRET;
-    const PLAID_ENV = 'sandbox';
-    const url = `https://${PLAID_ENV}.plaid.com/link/token/create`;
+    const plaidClientId = process.env.PLAID_CLIENT_ID;
+    const plaidSecret = process.env.PLAID_SECRET;
+    const plaidEnv = 'sandbox';
+    const url = `https://${plaidEnv}.plaid.com/link/token/create`;
 
     const requestBody = {
-        clientId: PLAID_CLIENT_ID,
-        secret: PLAID_SECRET,
-        clientName: 'CashCompass',
+        client_id: plaidClientId,
+        secret: plaidSecret,
+        client_name: 'CashCompass',
         user: {
-            client_user_id: req.body.uid
+            client_user_id: uid
         },
         products: ['auth', 'transactions', 'balance_plus', 'income_verification'],
         country_codes: ['US'],

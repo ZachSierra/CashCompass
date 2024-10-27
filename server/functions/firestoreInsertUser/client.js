@@ -4,7 +4,7 @@ admin.initializeApp();
 const db = admin.firestore();
 
 exports.firestoreInsertUser = async (req) => {
-    console.log("Entered client for firestoreInsertUser")
+    console.log("Entered client for firestoreInsertUser");
     try {
         const result = await db.collection('users').add({
             uid: req.body.uid,
